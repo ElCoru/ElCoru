@@ -8,9 +8,11 @@ Raspberry SSH Setup
 
     4. Meter la microSD en la raspberry, iniciar y hacer las configuración inicial.
 
-    5. Iniciar sesión, abrir un terminal y escribir ‘sudo apt update’, ‘sudo apt upgrade’ y ‘sudo reboot’ para buscar e instalar las últimas actualizaciones.
+    5. Iniciar sesión, abrir un terminal y escribir ‘sudo apt update’, ‘sudo apt upgrade’ y ‘sudo reboot’ para buscar e instalar
+       las últimas actualizaciones.
 
-    6. ‘sudo systemctl set-default multi-user.target’ para quitar la interfaz gráfica por defecto y ‘sudo systemctl isolate multi-user.target’.
+    6. ‘sudo systemctl set-default multi-user.target’ para quitar la interfaz gráfica por defecto y ‘sudo systemctl isolate
+        multi-user.target’.
 
     7. ‘ssh-keygen’ en el servidor y cliente para generar las claves.
 
@@ -27,7 +29,8 @@ Pasos sacados de aquí.
 
     2. ‘sudo make-cadir /etc/openvpn/easy-rsa’ para crear el directorio.
 
-    3. Usa ‘sudo su’ y ‘cd  /etc/openvpn/easy-rsa’ para ir a la carpeta creada como root y usa ‘./easyrsa init-pki’ y ‘./easyrsa build-ca’.
+    3. Usa ‘sudo su’ y ‘cd  /etc/openvpn/easy-rsa’ para ir a la carpeta creada como root y usa ‘./easyrsa init-pki’ y 
+       ‘./easyrsa build-ca’.
 
     4. Usa ‘cp /pki/ca.crt /home/user/’.
 
@@ -37,11 +40,12 @@ Pasos sacados de aquí.
 
     7. Ahora se copian todas las claves y certificados a /etc/openvpn/ con ‘cp pki/dh.pem pki/ca.crt pki/issued/myservername.crt pki/private/myservername.key /etc/openvpn/’.
 
-    8. Usa ‘cp /usr/share/doc/openvpn/examples/sample-config-files/server.conf /etc/openvpn/myserver.conf’ para tener el template de configuración del server y asegurate que los certificados y keys apuntan a los archivos que corresponden:
-        ca ca.crt
-           cert myservername.crt
-           key myservername.key
-           dh dh2048.pem
+    8. Usa ‘cp /usr/share/doc/openvpn/examples/sample-config-files/server.conf /etc/openvpn/myserver.conf’ para tener el template de 
+       configuración del server y asegurate que los certificados y keys apuntan a los archivos que corresponden:
+           * ca ca.crt
+           * cert myservername.crt
+           * key myservername.key
+           * dh dh2048.pem
 
        
     9. Edita ‘/etc/sysctl.conf’  y activa la linea ‘net.ipv4.ip_forward=1’ y usa ‘sysctl -p /etc/sysctl.conf’ para aplicar los cambios.

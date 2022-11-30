@@ -23,7 +23,6 @@ Raspberry SSH Setup
 
 
 Raspberry OpenVPN
-Pasos sacados de aquí.
 
     1. Instala openvpn con ‘sudo apt install openvpn easy-rsa’
 
@@ -38,28 +37,30 @@ Pasos sacados de aquí.
 
     6. Para crear los certificados usa ‘./easyrsa gen-req myservername nopass’ y ‘./easyrsa sign-req server myservername’.
 
-    7. Ahora se copian todas las claves y certificados a /etc/openvpn/ con ‘cp pki/dh.pem pki/ca.crt pki/issued/myservername.crt pki/private/myservername.key /etc/openvpn/’.
+    7. Ahora se copian todas las claves y certificados a /etc/openvpn/ con ‘cp pki/dh.pem pki/ca.crt pki/issued/myservername.crt 
+       pki/private/myservername.key /etc/openvpn/’.
 
     8. Usa ‘cp /usr/share/doc/openvpn/examples/sample-config-files/server.conf /etc/openvpn/myserver.conf’ para tener el template de 
        configuración del server y asegurate que los certificados y keys apuntan a los archivos que corresponden:
-           * ca ca.crt
-           * cert myservername.crt
-           * key myservername.key
-           * dh dh2048.pem
+        * ca ca.crt
+        * cert myservername.crt
+        * key myservername.key
+        * dh dh2048.pem
 
        
     9. Edita ‘/etc/sysctl.conf’  y activa la linea ‘net.ipv4.ip_forward=1’ y usa ‘sysctl -p /etc/sysctl.conf’ para aplicar los cambios.
 
-    10. Para crear un cliente se usa ‘./easyrsa gen-req myclient1 nopass’ y 
-        ‘./easyrsa sign-req client myclient1’.
+    10. Para crear un cliente se usa ‘./easyrsa gen-req myclient1 nopass’ y ‘./easyrsa sign-req client myclient1’.
 
     11. Una vez creado el cliente se usa ‘cp /pki/issued/myclient1.crt /home/user/’ y ‘cp pki/private/myclient1.key /home/user/’.
 
     12. Usa ‘cd etc/openvpn’, ‘sudo openvpn --genkey secret ta.key’ y ‘cp ta.key /home/user/’.
 
-    13. Para tener el archivo de configuración del cliente usa ‘sudo cp /usr/share/doc/openvpn/examples/sample-config-files/client.conf /home/user/’.
+    13. Para tener el archivo de configuración del cliente usa ‘sudo cp /usr/share/doc/openvpn/examples/sample-config-files/client.conf 
+        /home/user/’.
 
-    14. Usa ‘chown user:user  /home/user/myclient1.crt’, ‘chown user:user /home/user/myclient1.key’, ‘chown user:user  /home/user/ca.crt’, ‘chown user:user  /home/user/ta.key’ y ‘chown user:user  /home/user/client.conf.’
+    14. Usa ‘chown user:user  /home/user/myclient1.crt’, ‘chown user:user /home/user/myclient1.key’, ‘chown user:user 
+        /home/user/ca.crt’, ‘chown user:user  /home/user/ta.key’ y ‘chown user:user  /home/user/client.conf.’
 
     15. Ahora desde otro ordenador usa 
         -‘scp user@ip:/home/user/client.conf (path al fichero donde vas a guardar los archivos para los clientes sin paréntesis)’
@@ -69,13 +70,13 @@ Pasos sacados de aquí.
         -‘scp user@ip:/home/user/myclient1.crt (path al fichero donde vas a guardar los archivos para los clientes sin paréntesis)’
 
     16. Copia y edita el archivo client.conf, asegurate que los certificados y keys apuntan a los archivos que corresponden:
-        ca ca.crt
-        cert myclient1.crt
-        key myclient1.key
-        tls-auth ta.key 1
+        * ca ca.crt
+        * cert myclient1.crt
+        * key myclient1.key
+        * tls-auth ta.key 1
 
     17. Asegurate de que el keyword client está puesto y cambia la ip por la de la vpn:
-     client
-     remote ip 1194
+        * client
+        * remote ip 1194
 
     18. Guarda el archivo con el nombre del cliente y cambia la extensión a .ovpn

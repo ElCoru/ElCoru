@@ -14,6 +14,7 @@
 #
 
 # Raspberry OpenVPN
+##### Pasos sacados de [aquí](https://ubuntu.com/server/docs/service-openvpn)
 
 1. #### Instala openvpn con `sudo apt install openvpn easy-rsa`.
 
